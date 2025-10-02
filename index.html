@@ -10,10 +10,10 @@
   header{background:linear-gradient(135deg,#1a1a1a,#333);padding:60px 20px;text-align:center;position:relative;}
   header h1{font-size:2.5em;margin-bottom:10px;color:#00ff88;}
   header p{font-size:1.2em;margin-bottom:20px;}
-  header a, #loginBtn {
+  header a {
     display:inline-block; padding:12px 25px; background:#00ff88; color:#000; font-weight:bold; border-radius:8px; text-decoration:none; transition:all 0.3s ease; box-shadow:0 4px 15px rgba(0,255,136,0.3); cursor:pointer;
   }
-  header a:hover, #loginBtn:hover{
+  header a:hover{
     transform:translateY(-3px); box-shadow:0 6px 25px rgba(0,255,136,0.5); background:#00cc6f;
   }
   section{padding:50px 20px;max-width:900px;margin:auto;position:relative;}
@@ -339,6 +339,44 @@
     z-index: 1;
     margin-top: 30px;
   }
+  a.contact-method {
+    background: rgba(0, 255, 136, 0.05);
+    padding: 30px 25px;
+    border-radius: 15px;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: block;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    color: #00ff88;
+    text-align: center;
+    user-select: none;
+  }
+  a.contact-method:hover {
+    transform: translateY(-8px) scale(1.05);
+    border-color: #00ff88;
+    box-shadow: 0 8px 30px rgba(0, 255, 136, 0.3);
+    background: rgba(0, 255, 136, 0.1);
+    color: #000;
+  }
+  a.contact-method div {
+    font-size: 3em;
+    margin-bottom: 15px;
+  }
+  a.contact-method h4 {
+    font-size: 1.3em;
+    margin: 10px 0;
+  }
+  a.contact-method p {
+    font-weight: bold;
+    margin: 8px 0;
+    font-size: 0.95em;
+    color: #000;
+  }
+  a.contact-method small {
+    font-size: 0.85em;
+    color: #666;
+  }
   .contact-info-box {
     margin-top: 40px;
     padding: 25px;
@@ -386,102 +424,36 @@
     background: linear-gradient(135deg, #00ff88, #00cc6f);
     color: #000;
     font-weight: bold;
-    padding: 20px 25px;
-    border-radius: 15px;
+    padding: 25px 35px;
+    border-radius: 20px;
     cursor: pointer;
-    box-shadow: 0 8px 30px rgba(0, 255, 136, 0.4);
+    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.5);
     transition: all 0.3s ease;
-    min-width: 120px;
+    min-width: 140px;
     user-select: none;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 1.1em;
+    font-size: 1.25em;
     text-decoration: none;
+    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.5);
   }
   a.contact-method-btn:hover {
-    box-shadow: 0 12px 40px rgba(0, 255, 136, 0.7);
-    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 15px 60px rgba(0, 255, 136, 0.8);
+    transform: translateY(-6px) scale(1.1);
   }
   a.contact-method-btn div {
-    font-size: 2.5em;
-    margin-bottom: 10px;
+    font-size: 3em;
+    margin-bottom: 12px;
   }
 
-  /* Login Modal */
-  #loginModal .modal-content {
-    max-width: 400px;
-    text-align: center;
-  }
-  #loginModal h2 {
-    margin-bottom: 25px;
-  }
-  #loginModal form {
-    display: flex;
-    flex-direction: column;
-  }
-  #loginModal label {
-    color: #00ff88;
-    font-weight: bold;
-    margin-bottom: 8px;
-    text-align: left;
-  }
-  #loginModal input[type="email"], 
-  #loginModal input[type="text"] {
-    padding: 12px 15px;
-    margin-bottom: 20px;
-    border-radius: 15px;
-    border: 2px solid rgba(0,255,136,0.6);
-    background: linear-gradient(135deg,#121212,#1b1b1b);
-    color: #00ff88;
-    font-weight: bold;
-    font-size: 1.1em;
-    transition: border-color 0.3s ease, box-shadow 0.4s ease;
-  }
-  #loginModal input[type="email"]:focus, 
-  #loginModal input[type="text"]:focus {
-    border-color: #00ff88;
-    box-shadow: 0 0 30px rgba(0,255,136,0.8);
-    outline: none;
-    background: linear-gradient(135deg,#1a1a1a,#252525);
-  }
-  #loginModal button {
-    padding: 15px 20px;
-    background: linear-gradient(135deg,#00ff88,#00cc6f);
-    color: #000;
-    font-weight: 900;
-    font-size: 1.3em;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    box-shadow: 0 10px 40px rgba(0,255,136,0.5);
-    transition: all 0.4s ease;
-    user-select: none;
-  }
-  #loginModal button:hover {
-    box-shadow: 0 14px 50px rgba(0,255,136,0.8);
-    transform: translateY(-4px) scale(1.03);
-  }
-  #loginModal #codeInput {
-    display: none;
-  }
-  #loginModal .info-text {
-    color: #00ff88;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  #loginModal .error-text {
-    color: #ff4d4d;
-    margin-bottom: 10px;
-    display: none;
-  }
 </style>
 </head>
 <body>
 <header>
   <h1>Mr0neService</h1>
   <p>🎮 EA FC 26 Boosting – Division Rivals • FUT Champions • Squad Battles</p>
-  <button id="loginBtn">Login</button>
+  <a href="#services">Order Boost Now</a>
 </header>
 
 <section id="services">
@@ -597,8 +569,8 @@
     <div class="contact-grid">
       <a href="https://discord.gg/9SYWCZr8" target="_blank" rel="noopener noreferrer" class="contact-method">
         <div>💬</div>
-        <h4>Discord</h4>
-        <p>NowOne_</p>
+        <h4>Mr0neService Discord Server</h4>
+        <p>Join our official server for instant support & updates</p>
         <small>Instant messaging</small>
       </a>
     </div>
@@ -707,68 +679,24 @@
     <h2>📞 Order Confirmed! Contact via Discord</h2>
     <p id="orderIdDisplay" style="color: #00ff88; font-weight: bold; margin-bottom: 20px; font-size: 1.2em;"></p>
     <div class="contact-method-btns" style="justify-content:center;">
-      <!-- Changed to anchor link for reliable popup -->
       <a href="https://discord.gg/9SYWCZr8" target="_blank" rel="noopener noreferrer" class="contact-method-btn" id="discordLink">
         <div>💬</div>
-        Discord
+        Discord Server
       </a>
     </div>
   </div>
 </div>
 
-<!-- Login Modal -->
-<div id="loginModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('loginModal')">&times;</span>
-    <h2>Login</h2>
-    <form id="loginForm" onsubmit="handleLogin(event)">
-      <div class="form-group">
-        <label for="emailLogin">Enter your Email:</label>
-        <input type="email" id="emailLogin" required placeholder="you@example.com" />
-      </div>
-      <div class="form-group" id="codeGroup" style="display:none;">
-        <label for="codeInput">Enter Confirmation Code:</label>
-        <input type="text" id="codeInput" maxlength="6" placeholder="123456" />
-      </div>
-      <div class="info-text" id="loginInfo"></div>
-      <div class="error-text" id="loginError"></div>
-      <button type="submit" id="loginSubmitBtn">Send Code</button>
-    </form>
-  </div>
-</div>
-
 <script>
-  // Globals
   let currentPrice = 0;
   let lastOrderMessage = '';
   let lastOrderId = '';
-  let confirmationCode = '';
-  let loginStep = 1; // 1 = enter email, 2 = enter code
 
-  const loginModal = document.getElementById('loginModal');
-  const loginBtn = document.getElementById('loginBtn');
-  const loginForm = document.getElementById('loginForm');
-  const emailLogin = document.getElementById('emailLogin');
-  const codeInput = document.getElementById('codeInput');
-  const codeGroup = document.getElementById('codeGroup');
-  const loginInfo = document.getElementById('loginInfo');
-  const loginError = document.getElementById('loginError');
-  const loginSubmitBtn = document.getElementById('loginSubmitBtn');
-
-  loginBtn.addEventListener('click', () => {
-    openLoginModal();
-  });
-
-  function openLoginModal() {
-    loginStep = 1;
-    emailLogin.value = '';
-    codeInput.value = '';
-    codeGroup.style.display = 'none';
-    loginInfo.textContent = '';
-    loginError.textContent = '';
-    loginSubmitBtn.textContent = 'Send Code';
-    loginModal.style.display = 'block';
-    emailLogin.focus();
+  function openModal(service){
+    if(service === 'division') document.getElementById('divisionModal').style.display = 'block';
+    else if(service === 'fut') document.getElementById('futModal').style.display = 'block';
+    else if(service === 'squad') document.getElementById('squadModal').style.display = 'block';
+    updatePriceDisplay(service, false);
   }
 
   function closeModal(id){
@@ -780,7 +708,6 @@
     else selectEl.classList.remove('selected');
   }
 
-  // Order price calculation functions
   function calculateDivisionPrice(){
     const c = parseInt(document.getElementById('currentDivision').value);
     const d = parseInt(document.getElementById('desiredDivision').value);
@@ -827,7 +754,6 @@
     else priceDisplay.classList.add('show');
   }
 
-  // Confirm order function
   function generateOrderId(){
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let id = '';
@@ -860,84 +786,17 @@
     lastOrderId = generateOrderId();
     closeModal(service + 'Modal');
 
-    // Show order ID in contact modal and open it
     const orderIdDisplay = document.getElementById('orderIdDisplay');
     orderIdDisplay.textContent = `Your Order ID: ${lastOrderId} (Give this to the Discord mod)`;
     document.getElementById('contactMethodModal').style.display = 'block';
   }
 
-  // Login form handling
-  function handleLogin(event){
-    event.preventDefault();
-    loginError.style.display = 'none';
-    loginError.textContent = '';
-    if(loginStep === 1){
-      const email = emailLogin.value.trim();
-      if(!validateEmail(email)){
-        loginError.textContent = 'Please enter a valid email address.';
-        loginError.style.display = 'block';
-        return;
-      }
-      confirmationCode = (''+Math.floor(100000 + Math.random() * 900000));
-      loginInfo.textContent = `A confirmation code has been sent to ${email} (Simulated). Please enter it below.`;
-      loginSubmitBtn.textContent = 'Confirm Code';
-      codeGroup.style.display = 'block';
-      emailLogin.disabled = true;
-      loginStep = 2;
-    } else if(loginStep === 2){
-      const enteredCode = codeInput.value.trim();
-      if(enteredCode === confirmationCode){
-        loginInfo.textContent = 'Email confirmed! You are logged in.';
-        loginSubmitBtn.disabled = true;
-        setTimeout(() => {
-          closeModal('loginModal');
-          loginSubmitBtn.disabled = false;
-          loginStep = 1;
-          resetLoginForm();
-          alert('Login successful! You can now proceed with your orders.');
-        }, 1000);
-      } else {
-        loginError.textContent = 'Incorrect confirmation code. Please try again.';
-        loginError.style.display = 'block';
-      }
-    }
-  }
-
-  function resetLoginForm(){
-    emailLogin.value = '';
-    emailLogin.disabled = false;
-    codeInput.value = '';
-    codeGroup.style.display = 'none';
-    loginInfo.textContent = '';
-    loginError.style.display = 'none';
-    loginError.textContent = '';
-    loginSubmitBtn.textContent = 'Send Code';
-  }
-
-  function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email.toLowerCase());
-  }
-
-  // Other UI functions reused
-
-  function openModal(service){
-    if(service === 'division') document.getElementById('divisionModal').style.display = 'block';
-    else if(service === 'fut') document.getElementById('futModal').style.display = 'block';
-    else if(service === 'squad') document.getElementById('squadModal').style.display = 'block';
-    updatePriceDisplay(service, false);
-  }
-
   window.onclick = function(event){
-    const modals = ['divisionModal', 'futModal', 'squadModal', 'contactMethodModal', 'loginModal'];
+    const modals = ['divisionModal', 'futModal', 'squadModal', 'contactMethodModal'];
     modals.forEach(modalId => {
       const modal = document.getElementById(modalId);
       if(event.target === modal){
         closeModal(modalId);
-        if(modalId === 'loginModal'){
-          resetLoginForm();
-          loginStep = 1;
-        }
       }
     });
   };
