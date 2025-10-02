@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mr0neService - EA FC 26 Boosting</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:Arial,sans-serif;background:#0f0f0f;color:#fff;line-height:1.6;scroll-behavior:smooth;}
+  header{background:linear-gradient(135deg,#1a1a1a,#333);padding:60px 20px;text-align:center;position:relative;}
+  header h1{font-size:2.5em;margin-bottom:10px;color:#00ff88;}
+  header p{font-size:1.2em;margin-bottom:20px;}
+  header a, #loginBtn {
+    display:inline-block; padding:12px 25px; background:#00ff88; color:#000; font-weight:bold; border-radius:8px; text-decoration:none; transition:all 0.3s ease; box-shadow:0 4px 15px rgba(0,255,136,0.3); cursor:pointer;
+  }
+  header a:hover, #loginBtn:hover{
+    transform:translateY(-3px); box-shadow:0 6px 25px rgba(0,255,136,0.5); background:#00cc6f;
+  }
+  section{padding:50px 20px;max-width:900px;margin:auto;position:relative;}
+  section h2{color:#00ff88;margin-bottom:20px;}
+  .service-card{background:linear-gradient(135deg,#1a1a1a,#252525);padding:40px;border-radius:20px;border:2px solid #00ff88;box-shadow:0 10px 40px rgba(0,255,136,0.2);margin-top:30px;position:relative;overflow:hidden;transition:all 0.3s ease;}
+  .service-card:hover{transform:translateY(-5px);box-shadow:0 15px 50px rgba(0,255,136,0.3);}
+  .service-item{text-align:center;padding:20px;transition:transform 0.3s ease;cursor:pointer;flex:1;min-width:250px;}
+  .service-item:hover{transform:scale(1.05);}
+  .service-icon{font-size:4em;margin-bottom:15px;}
+  .service-title{color:#00ff88;font-size:1.5em;margin:15px 0;}
+  .service-desc{color:#bbb;line-height:1.8;margin-bottom:20px;}
+  .service-features{background:rgba(0,255,136,0.05);padding:15px;border-radius:10px;border:1px solid rgba(0,255,136,0.2);}
+  .service-features p{margin:8px 0;color:#ccc;font-size:0.95em;}
+  .order-btn{margin-top:20px;padding:12px 20px;background:#00ff88;color:#000;font-weight:bold;border-radius:8px;display:inline-block;transition:all 0.3s ease;user-select:none;}
+  .order-btn:hover{background:#00cc6f;transform:scale(1.05);}
+  .grid{display:flex;justify-content:space-around;flex-wrap:wrap;gap:20px;position:relative;z-index:1;}
+
+  .pricing-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:30px;
+    background:#1a1a1a;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 4px 20px rgba(0,255,136,0.1);
+  }
+  .pricing-table th{
+    background:linear-gradient(135deg,#00ff88,#00cc6f);
+    color:#000;
+    padding:18px;
+    font-size:1.1em;
+    font-weight:bold;
+    text-transform:uppercase;
+    text-align:center;
+  }
+  .pricing-table td{
+    padding:16px;
+    border-bottom:1px solid #2a2a2a;
+    text-align:center;
+    font-size:1.05em;
+    color:#00ff88;
+    font-weight:bold;
+  }
+  .pricing-table td.service-name{
+    text-align:left;
+    color:#fff;
+    font-weight:600;
+  }
+  .pricing-table tr:last-child td{
+    border-bottom:none;
+  }
+  .pricing-table tr:hover{
+    background:#222;
+    transform:scale(1.02);
+    box-shadow:0 4px 15px rgba(0,255,136,0.2);
+  }
+
+  /* Modal styles */
+  .modal{
+    display:none;
+    position:fixed;
+    z-index:1000;
+    left:0;top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.95);
+    backdrop-filter:blur(10px);
+    animation:fadeIn 0.4s ease;
+  }
+  @keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+  }
+  @keyframes slideUp{
+    from{transform:translateY(100px) scale(0.9);opacity:0;}
+    to{transform:translateY(0) scale(1);opacity:1;}
+  }
+  .modal-content{
+    background:linear-gradient(135deg,#1a1a1a,#2a2a2a);
+    margin:3% auto;
+    padding:50px;
+    border:3px solid #00ff88;
+    border-radius:25px;
+    width:90%;
+    max-width:650px;
+    box-shadow:0 20px 80px rgba(0,255,136,0.4),0 0 100px rgba(0,255,136,0.2);
+    position:relative;
+    animation:slideUp 0.5s ease;
+    overflow:hidden;
+    transition:all 0.4s ease;
+    text-align:center;
+  }
+  .modal-content::before{
+    content:'';
+    position:absolute;
+    top:-50%;
+    left:-50%;
+    width:200%;
+    height:200%;
+    background:radial-gradient(circle,rgba(0,255,136,0.03),transparent 50%);
+    animation:rotate 20s linear infinite;
+    pointer-events:none;
+  }
+  @keyframes rotate{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+  }
+  .modal-content h2{
+    color:#00ff88;
+    margin-bottom:30px;
+    position:relative;
+    z-index:1;
+  }
+  .close{
+    color:#00ff88;
+    position:absolute;
+    top:20px;
+    right:25px;
+    font-size:40px;
+    font-weight:bold;
+    cursor:pointer;
+    line-height:1;
+    transition:all 0.3s ease;
+    z-index:10;
+  }
+  .close:hover{
+    color:#fff;
+    transform:rotate(90deg) scale(1.2);
+  }
+  .form-group{
+    margin:30px 0;
+    position:relative;
+    z-index:1;
+  }
+  .form-group label{
+    display:block;
+    color:#00ff88;
+    font-weight:bold;
+    margin-bottom:12px;
+    font-size:1.2em;
+    text-shadow:0 2px 10px rgba(0,255,136,0.3);
+  }
+  .form-group select {
+    width:100%;
+    padding:18px 20px;
+    background:linear-gradient(135deg,#121212,#1b1b1b);
+    border:2px solid rgba(0,255,136,0.6);
+    border-radius:15px;
+    color:#00ff88;
+    font-size:1.2em;
+    font-weight:bold;
+    cursor:pointer;
+    transition:border-color 0.3s ease, box-shadow 0.4s ease, background 0.3s ease;
+    appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300ff88' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 15px center;
+    box-shadow:0 0 15px rgba(0,255,136,0.5);
+  }
+  .form-group select:hover,
+  .form-group select:focus {
+    border-color:#00ff88;
+    box-shadow:0 0 30px rgba(0,255,136,0.8);
+    outline:none;
+    background:linear-gradient(135deg,#1a1a1a,#252525);
+  }
+  .form-group select.selected {
+    background:linear-gradient(135deg,#004d24,#007a39);
+    color:#a8faaa;
+    box-shadow:0 0 40px rgba(0,255,136,0.9);
+    border-color:#00ff88;
+  }
+  .price-display {
+    background:linear-gradient(135deg,rgba(0,255,136,0.2),rgba(0,255,136,0.08));
+    padding:40px;
+    border-radius:25px;
+    border:3px solid #00ff88;
+    text-align:center;
+    margin:40px 0;
+    position:relative;
+    z-index:1;
+    box-shadow:0 0 30px rgba(0,255,136,0.6), inset 0 0 40px rgba(0,255,136,0.3);
+    animation:priceGlow 2.5s ease-in-out infinite;
+    transition:transform 0.3s ease;
+    display:none;
+  }
+  .price-display.show {
+    display:block;
+  }
+  .price-display:hover {
+    transform:scale(1.05);
+  }
+  @keyframes priceGlow {
+    0%,100%{box-shadow:0 0 30px rgba(0,255,136,0.6), inset 0 0 40px rgba(0,255,136,0.3);}
+    50%{box-shadow:0 0 45px rgba(0,255,136,0.9), inset 0 0 60px rgba(0,255,136,0.5);}
+  }
+  .price-display .price {
+    font-size:4em;
+    font-weight:bold;
+    color:#00ff88;
+    text-shadow:0 0 15px #00ff88, 0 0 30px #00ff88, 0 0 50px #00ff88;
+    animation:pulsePrice 1.8s ease-in-out infinite;
+  }
+  @keyframes pulsePrice {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  .confirm-btn {
+    width: 100%;
+    padding: 22px;
+    background: linear-gradient(135deg, #00ff88, #00cc6f);
+    color: #000;
+    font-weight: 900;
+    font-size: 1.35em;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.5);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    user-select: none;
+  }
+  .confirm-btn:hover {
+    box-shadow: 0 14px 50px rgba(0, 255, 136, 0.8);
+    transform: translateY(-4px) scale(1.03);
+  }
+  .confirm-btn:active {
+    transform: translateY(0) scale(0.97);
+  }
+  .confirm-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    transition: width 0.6s, height 0.6s, top 0.6s, left 0.6s;
+    pointer-events: none;
+  }
+  .confirm-btn:hover::before {
+    width: 400px;
+    height: 400px;
+    top: -200px;
+    left: -200px;
+  }
+
+  /* Why Choose Section */
+  .feature-card {
+    background: linear-gradient(135deg, #1a1a1a, #252525);
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+    min-width: 250px;
+  }
+  .feature-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    border-color: #00ff88;
+    box-shadow: 0 8px 30px rgba(0, 255, 136, 0.3);
+  }
+  .pulse-orb {
+    position: absolute;
+    background: radial-gradient(circle, rgba(0,255,136,0.15), transparent);
+    border-radius: 50%;
+    animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.7; }
+  }
+  .feature-card > div:first-child {
+    position: relative;
+    z-index: 1;
+  }
+  .feature-card h3 {
+    color: #00ff88;
+    margin: 10px 0;
+    position: relative;
+    z-index: 1;
+  }
+  .feature-card p {
+    color: #ccc;
+    font-size: 0.95em;
+    position: relative;
+    z-index: 1;
+  }
+  .feature-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  /* Contact Card */
+  .contact-card {
+    background: linear-gradient(135deg, #1a1a1a, #252525);
+    padding: 50px;
+    border-radius: 20px;
+    border: 2px solid #00ff88;
+    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
+    margin-top: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(0, 255, 136, 0.3);
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+    margin-top: 30px;
+  }
+  .contact-info-box {
+    margin-top: 40px;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .contact-info-box p {
+    color: #00ff88;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .contact-info-box p + p {
+    color: #bbb;
+    font-size: 0.95em;
+    font-weight: normal;
+    margin-top: 0;
+  }
+
+  /* Contact Method Modal */
+  #contactMethodModal .modal-content {
+    max-width: 500px;
+    text-align: center;
+  }
+  #contactMethodModal h2 {
+    margin-bottom: 25px;
+  }
+  #contactMethodModal p#orderIdDisplay {
+    color: #00ff88;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+  }
+  .contact-method-btns {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  a.contact-method-btn {
+    background: linear-gradient(135deg, #00ff88, #00cc6f);
+    color: #000;
+    font-weight: bold;
+    padding: 20px 25px;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(0, 255, 136, 0.4);
+    transition: all 0.3s ease;
+    min-width: 120px;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.1em;
+    text-decoration: none;
+  }
+  a.contact-method-btn:hover {
+    box-shadow: 0 12px 40px rgba(0, 255, 136, 0.7);
+    transform: translateY(-4px) scale(1.05);
+  }
+  a.contact-method-btn div {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
+
+  /* Login Modal */
+  #loginModal .modal-content {
+    max-width: 400px;
+    text-align: center;
+  }
+  #loginModal h2 {
+    margin-bottom: 25px;
+  }
+  #loginModal form {
+    display: flex;
+    flex-direction: column;
+  }
+  #loginModal label {
+    color: #00ff88;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-align: left;
+  }
+  #loginModal input[type="email"], 
+  #loginModal input[type="text"] {
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    border: 2px solid rgba(0,255,136,0.6);
+    background: linear-gradient(135deg,#121212,#1b1b1b);
+    color: #00ff88;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: border-color 0.3s ease, box-shadow 0.4s ease;
+  }
+  #loginModal input[type="email"]:focus, 
+  #loginModal input[type="text"]:focus {
+    border-color: #00ff88;
+    box-shadow: 0 0 30px rgba(0,255,136,0.8);
+    outline: none;
+    background: linear-gradient(135deg,#1a1a1a,#252525);
+  }
+  #loginModal button {
+    padding: 15px 20px;
+    background: linear-gradient(135deg,#00ff88,#00cc6f);
+    color: #000;
+    font-weight: 900;
+    font-size: 1.3em;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 10px 40px rgba(0,255,136,0.5);
+    transition: all 0.4s ease;
+    user-select: none;
+  }
+  #loginModal button:hover {
+    box-shadow: 0 14px 50px rgba(0,255,136,0.8);
+    transform: translateY(-4px) scale(1.03);
+  }
+  #loginModal #codeInput {
+    display: none;
+  }
+  #loginModal .info-text {
+    color: #00ff88;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  #loginModal .error-text {
+    color: #ff4d4d;
+    margin-bottom: 10px;
+    display: none;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Mr0neService</h1>
+  <p>🎮 EA FC 26 Boosting – Division Rivals • FUT Champions • Squad Battles</p>
+  <button id="loginBtn">Login</button>
+</header>
+
+<section id="services">
+  <h2>🔥 Choose Your Boosting Service</h2>
+  <p style="text-align: center; color: #bbb; font-size: 1.1em; margin: 10px 0 20px;">
+    Select the service you want and contact us to get started!
+  </p>
+  <div class="service-card">
+    <div class="grid">
+      <div class="service-item" onclick="openModal('division')">
+        <div class="service-icon">📈</div>
+        <h3 class="service-title">Division Rivals</h3>
+        <p class="service-desc">Climb from Division 10 to Elite with our professional boosters</p>
+        <div class="service-features">
+          <p>✓ All divisions available</p>
+          <p>✓ Fast completion</p>
+          <p>✓ Weekly rewards</p>
+        </div>
+        <div class="order-btn">Order Now →</div>
+      </div>
+      <div class="service-item" onclick="openModal('fut')">
+        <div class="service-icon">🏆</div>
+        <h3 class="service-title">FUT Champions</h3>
+        <p class="service-desc">Secure up to 15 wins for premium rewards and higher ranks</p>
+        <div class="service-features">
+          <p>✓ Up to 15 wins</p>
+          <p>✓ Premium packs</p>
+          <p>✓ Rank tracking</p>
+        </div>
+        <div class="order-btn">Order Now →</div>
+      </div>
+      <div class="service-item" onclick="openModal('squad')">
+        <div class="service-icon">⚔️</div>
+        <h3 class="service-title">Squad Battles</h3>
+        <p class="service-desc">Compete in Squad Battles for top ranks and exclusive rewards</p>
+        <div class="service-features">
+          <p>✓ Weekly rewards</p>
+          <p>✓ Competitive matchmaking</p>
+          <p>✓ Custom difficulty levels</p>
+        </div>
+        <div class="order-btn">Order Now →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <h2>💰 Pricing</h2>
+  <table class="pricing-table">
+    <tr><th>Service</th><th>Price</th></tr>
+    <tr><td class="service-name">📈 Division 10 → 7</td><td>$15</td></tr>
+    <tr><td class="service-name">📈 Division 10 → 5</td><td>$25</td></tr>
+    <tr><td class="service-name">🏆 FUT Champions – 7 Wins</td><td>$15</td></tr>
+    <tr><td class="service-name">🏆 FUT Champions – 11 Wins</td><td>$25</td></tr>
+    <tr><td class="service-name">🏆 FUT Champions – 15 Wins</td><td>$40</td></tr>
+    <tr><td class="service-name">⚔️ Squad Battles - Gold</td><td>$35</td></tr>
+    <tr><td class="service-name">⚔️ Squad Battles - Elite</td><td>$50</td></tr>
+  </table>
+  <p style="margin-top:10px;">👉 Custom orders available on request!</p>
+</section>
+
+<section>
+  <h2>✅ Why Choose Mr0neService?</h2>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="pulse-orb" style="top: -30px; right: -30px; width: 120px; height: 120px;"></div>
+      <div style="font-size: 2.5em; margin-bottom: 10px; position: relative; z-index: 1;">🔒</div>
+      <h3>100% Secure</h3>
+      <p>VPN protection from your region. Your account stays safe with our encrypted login process.</p>
+    </div>
+    <div class="feature-card">
+      <div class="pulse-orb" style="top: -30px; right: -30px; width: 120px; height: 120px; animation-delay: 0.5s;"></div>
+      <div style="font-size: 2.5em; margin-bottom: 10px; position: relative; z-index: 1;">⚡</div>
+      <h3>Lightning Fast</h3>
+      <p>Most boosts completed within 24-48 hours. Start climbing the ranks today.</p>
+    </div>
+    <div class="feature-card">
+      <div class="pulse-orb" style="top: -30px; right: -30px; width: 120px; height: 120px; animation-delay: 1s;"></div>
+      <div style="font-size: 2.5em; margin-bottom: 10px; position: relative; z-index: 1;">⭐</div>
+      <h3>Trusted Service</h3>
+      <p>Experienced Elite division players with verified reviews and hundreds of satisfied customers.</p>
+    </div>
+    <div class="feature-card">
+      <div class="pulse-orb" style="top: -30px; right: -30px; width: 120px; height: 120px; animation-delay: 0.2s;"></div>
+      <div style="font-size: 2.5em; margin-bottom: 10px; position: relative; z-index: 1;">💬</div>
+      <h3>24/7 Support</h3>
+      <p>Live updates on your boost progress. We're always available to answer your questions.</p>
+    </div>
+    <div class="feature-card">
+      <div class="pulse-orb" style="top: -30px; right: -30px; width: 120px; height: 120px; animation-delay: 0.7s;"></div>
+      <div style="font-size: 2.5em; margin-bottom: 10px; position: relative; z-index: 1;">💳</div>
+      <h3>Flexible Payment</h3>
+      <p>Multiple payment options: PayPal, Mastercard, Visa Card accepted.</p>
+    </div>
+    <div class="feature-card">
+      <div class="pulse-orb" style="top: -30px; right: -30px; width: 120px; height: 120px; animation-delay: 1.2s;"></div>
+      <div style="font-size: 2.5em; margin-bottom: 10px; position: relative; z-index: 1;">🎯</div>
+      <h3>Guaranteed Results</h3>
+      <p>We guarantee the wins and ranks you pay for, or your money back. No exceptions.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>📩 Contact Us</h2>
+  <div class="contact-card">
+    <div class="pulse-orb" style="top: -60px; right: -60px; width: 250px; height: 250px;"></div>
+    <div class="pulse-orb" style="bottom: -40px; left: -40px; width: 180px; height: 180px; animation-delay: 1s;"></div>
+    <div style="text-align: center; margin-bottom: 40px; position: relative; z-index: 1;">
+      <h3 style="color: #00ff88; font-size: 1.8em; margin-bottom: 15px;">Ready to Start Your Boost?</h3>
+      <p style="color: #bbb; font-size: 1.1em;">Choose your preferred platform to reach us. We respond within minutes!</p>
+    </div>
+    <div class="contact-grid">
+      <a href="https://discord.gg/9SYWCZr8" target="_blank" rel="noopener noreferrer" class="contact-method">
+        <div>💬</div>
+        <h4>Discord</h4>
+        <p>NowOne_</p>
+        <small>Instant messaging</small>
+      </a>
+    </div>
+    <div class="contact-info-box">
+      <p>⚡ Average Response Time: 15 Minutes</p>
+      <p>We are here to answer all your questions and get your boost started immediately!</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 Mr0neService – EA FC 26 Boosting. All Rights Reserved.
+</footer>
+
+<!-- Modals -->
+
+<div id="divisionModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('divisionModal')">&times;</span>
+    <h2>📈 Division Rivals Boost</h2>
+    <div class="form-group">
+      <label>Current Division:</label>
+      <select id="currentDivision" onchange="calculateDivisionPrice(); updateSelectBackground(this);">
+        <option value="">Select Current Division</option>
+        <option value="10">Division 10</option>
+        <option value="9">Division 9</option>
+        <option value="8">Division 8</option>
+        <option value="7">Division 7</option>
+        <option value="6">Division 6</option>
+        <option value="5">Division 5</option>
+        <option value="4">Division 4</option>
+        <option value="3">Division 3</option>
+        <option value="2">Division 2</option>
+        <option value="1">Division 1</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Desired Division:</label>
+      <select id="desiredDivision" onchange="calculateDivisionPrice(); updateSelectBackground(this);">
+        <option value="">Select Desired Division</option>
+        <option value="9">Division 9</option>
+        <option value="8">Division 8</option>
+        <option value="7">Division 7</option>
+        <option value="6">Division 6</option>
+        <option value="5">Division 5</option>
+        <option value="4">Division 4</option>
+        <option value="3">Division 3</option>
+        <option value="2">Division 2</option>
+        <option value="1">Division 1</option>
+        <option value="0">Elite</option>
+      </select>
+    </div>
+    <div class="price-display" id="divisionPriceDisplay">
+      <h3>Total Price:</h3>
+      <div class="price" id="divisionPrice">$0</div>
+    </div>
+    <button class="confirm-btn" onclick="confirmOrder('division')">Confirm & Contact Us</button>
+  </div>
+</div>
+
+<div id="futModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('futModal')">&times;</span>
+    <h2>🏆 FUT Champions Boost</h2>
+    <div class="form-group">
+      <label>Number of Wins:</label>
+      <select id="futWins" onchange="calculateFutPrice(); updateSelectBackground(this);">
+        <option value="">Select Number of Wins</option>
+        <option value="7">7 Wins - $15</option>
+        <option value="11">11 Wins - $25</option>
+        <option value="15">15 Wins - $40</option>
+      </select>
+    </div>
+    <div class="price-display" id="futPriceDisplay">
+      <h3>Total Price:</h3>
+      <div class="price" id="futPrice">$0</div>
+    </div>
+    <button class="confirm-btn" onclick="confirmOrder('fut')">Confirm & Contact Us</button>
+  </div>
+</div>
+
+<div id="squadModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('squadModal')">&times;</span>
+    <h2>⚔️ Squad Battles Boost</h2>
+    <div class="form-group">
+      <label>Select Difficulty Level:</label>
+      <select id="squadDifficulty" onchange="calculateSquadPrice(); updateSelectBackground(this);">
+        <option value="">Select Difficulty</option>
+        <option value="gold">Gold - $35</option>
+        <option value="elite">Elite - $50</option>
+      </select>
+    </div>
+    <div class="price-display" id="squadPriceDisplay">
+      <h3>Total Price:</h3>
+      <div class="price" id="squadPrice">$0</div>
+    </div>
+    <button class="confirm-btn" onclick="confirmOrder('squad')">Confirm & Contact Us</button>
+  </div>
+</div>
+
+<!-- Contact Method Modal -->
+<div id="contactMethodModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('contactMethodModal')">&times;</span>
+    <h2>📞 Order Confirmed! Contact via Discord</h2>
+    <p id="orderIdDisplay" style="color: #00ff88; font-weight: bold; margin-bottom: 20px; font-size: 1.2em;"></p>
+    <div class="contact-method-btns" style="justify-content:center;">
+      <!-- Changed to anchor link for reliable popup -->
+      <a href="https://discord.gg/9SYWCZr8" target="_blank" rel="noopener noreferrer" class="contact-method-btn" id="discordLink">
+        <div>💬</div>
+        Discord
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('loginModal')">&times;</span>
+    <h2>Login</h2>
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label for="emailLogin">Enter your Email:</label>
+        <input type="email" id="emailLogin" required placeholder="you@example.com" />
+      </div>
+      <div class="form-group" id="codeGroup" style="display:none;">
+        <label for="codeInput">Enter Confirmation Code:</label>
+        <input type="text" id="codeInput" maxlength="6" placeholder="123456" />
+      </div>
+      <div class="info-text" id="loginInfo"></div>
+      <div class="error-text" id="loginError"></div>
+      <button type="submit" id="loginSubmitBtn">Send Code</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Globals
+  let currentPrice = 0;
+  let lastOrderMessage = '';
+  let lastOrderId = '';
+  let confirmationCode = '';
+  let loginStep = 1; // 1 = enter email, 2 = enter code
+
+  const loginModal = document.getElementById('loginModal');
+  const loginBtn = document.getElementById('loginBtn');
+  const loginForm = document.getElementById('loginForm');
+  const emailLogin = document.getElementById('emailLogin');
+  const codeInput = document.getElementById('codeInput');
+  const codeGroup = document.getElementById('codeGroup');
+  const loginInfo = document.getElementById('loginInfo');
+  const loginError = document.getElementById('loginError');
+  const loginSubmitBtn = document.getElementById('loginSubmitBtn');
+
+  loginBtn.addEventListener('click', () => {
+    openLoginModal();
+  });
+
+  function openLoginModal() {
+    loginStep = 1;
+    emailLogin.value = '';
+    codeInput.value = '';
+    codeGroup.style.display = 'none';
+    loginInfo.textContent = '';
+    loginError.textContent = '';
+    loginSubmitBtn.textContent = 'Send Code';
+    loginModal.style.display = 'block';
+    emailLogin.focus();
+  }
+
+  function closeModal(id){
+    document.getElementById(id).style.display = 'none';
+  }
+
+  function updateSelectBackground(selectEl){
+    if(selectEl.value && selectEl.value !== '') selectEl.classList.add('selected');
+    else selectEl.classList.remove('selected');
+  }
+
+  // Order price calculation functions
+  function calculateDivisionPrice(){
+    const c = parseInt(document.getElementById('currentDivision').value);
+    const d = parseInt(document.getElementById('desiredDivision').value);
+    if(c && !isNaN(d) && c > d){
+      currentPrice = (c - d) * 5;
+      document.getElementById('divisionPrice').textContent = '$' + currentPrice;
+      updatePriceDisplay('division', false);
+    } else if(c && !isNaN(d) && c <= d){
+      alert('Desired division must be higher than current division!');
+      document.getElementById('desiredDivision').value = '';
+      updateSelectBackground(document.getElementById('desiredDivision'));
+      updatePriceDisplay('division', true);
+      currentPrice = 0;
+    } else {
+      updatePriceDisplay('division', true);
+      currentPrice = 0;
+    }
+  }
+  function calculateFutPrice(){
+    const w = document.getElementById('futWins').value;
+    currentPrice = w === '7' ? 15 : w === '11' ? 25 : w === '15' ? 40 : 0;
+    if(currentPrice > 0){
+      document.getElementById('futPrice').textContent = '$' + currentPrice;
+      updatePriceDisplay('fut', false);
+    } else {
+      updatePriceDisplay('fut', true);
+    }
+  }
+  function calculateSquadPrice(){
+    const d = document.getElementById('squadDifficulty').value;
+    if(d === 'gold') currentPrice = 35;
+    else if(d === 'elite') currentPrice = 50;
+    else currentPrice = 0;
+    if(currentPrice > 0){
+      document.getElementById('squadPrice').textContent = '$' + currentPrice;
+      updatePriceDisplay('squad', false);
+    } else {
+      updatePriceDisplay('squad', true);
+    }
+  }
+  function updatePriceDisplay(service, hide){
+    const priceDisplay = document.getElementById(service + 'PriceDisplay');
+    if(hide) priceDisplay.classList.remove('show');
+    else priceDisplay.classList.add('show');
+  }
+
+  // Confirm order function
+  function generateOrderId(){
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let id = '';
+    for(let i=0; i<8; i++){
+      id += chars.charAt(Math.floor(Math.random()*chars.length));
+    }
+    return id;
+  }
+
+  function confirmOrder(service){
+    if(currentPrice === 0){
+      alert('Please select your options first!');
+      return;
+    }
+    let msg = '';
+    if(service === 'division'){
+      const c = document.getElementById('currentDivision').value;
+      const d = document.getElementById('desiredDivision').value;
+      const dt = d === '0' ? 'Elite' : 'Division ' + d;
+      msg = `Division Rivals boost from Division ${c} to ${dt}. Total: $${currentPrice}`;
+    } else if(service === 'fut'){
+      const w = document.getElementById('futWins').value;
+      msg = `FUT Champions boost for ${w} wins. Total: $${currentPrice}`;
+    } else if(service === 'squad'){
+      const diffSelect = document.getElementById('squadDifficulty');
+      const diffText = diffSelect.options[diffSelect.selectedIndex].text.split(' - ')[0];
+      msg = `Squad Battles boost at ${diffText} difficulty. Total: $${currentPrice}`;
+    }
+    lastOrderMessage = msg;
+    lastOrderId = generateOrderId();
+    closeModal(service + 'Modal');
+
+    // Show order ID in contact modal and open it
+    const orderIdDisplay = document.getElementById('orderIdDisplay');
+    orderIdDisplay.textContent = `Your Order ID: ${lastOrderId} (Give this to the Discord mod)`;
+    document.getElementById('contactMethodModal').style.display = 'block';
+  }
+
+  // Login form handling
+  function handleLogin(event){
+    event.preventDefault();
+    loginError.style.display = 'none';
+    loginError.textContent = '';
+    if(loginStep === 1){
+      const email = emailLogin.value.trim();
+      if(!validateEmail(email)){
+        loginError.textContent = 'Please enter a valid email address.';
+        loginError.style.display = 'block';
+        return;
+      }
+      confirmationCode = (''+Math.floor(100000 + Math.random() * 900000));
+      loginInfo.textContent = `A confirmation code has been sent to ${email} (Simulated). Please enter it below.`;
+      loginSubmitBtn.textContent = 'Confirm Code';
+      codeGroup.style.display = 'block';
+      emailLogin.disabled = true;
+      loginStep = 2;
+    } else if(loginStep === 2){
+      const enteredCode = codeInput.value.trim();
+      if(enteredCode === confirmationCode){
+        loginInfo.textContent = 'Email confirmed! You are logged in.';
+        loginSubmitBtn.disabled = true;
+        setTimeout(() => {
+          closeModal('loginModal');
+          loginSubmitBtn.disabled = false;
+          loginStep = 1;
+          resetLoginForm();
+          alert('Login successful! You can now proceed with your orders.');
+        }, 1000);
+      } else {
+        loginError.textContent = 'Incorrect confirmation code. Please try again.';
+        loginError.style.display = 'block';
+      }
+    }
+  }
+
+  function resetLoginForm(){
+    emailLogin.value = '';
+    emailLogin.disabled = false;
+    codeInput.value = '';
+    codeGroup.style.display = 'none';
+    loginInfo.textContent = '';
+    loginError.style.display = 'none';
+    loginError.textContent = '';
+    loginSubmitBtn.textContent = 'Send Code';
+  }
+
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email.toLowerCase());
+  }
+
+  // Other UI functions reused
+
+  function openModal(service){
+    if(service === 'division') document.getElementById('divisionModal').style.display = 'block';
+    else if(service === 'fut') document.getElementById('futModal').style.display = 'block';
+    else if(service === 'squad') document.getElementById('squadModal').style.display = 'block';
+    updatePriceDisplay(service, false);
+  }
+
+  window.onclick = function(event){
+    const modals = ['divisionModal', 'futModal', 'squadModal', 'contactMethodModal', 'loginModal'];
+    modals.forEach(modalId => {
+      const modal = document.getElementById(modalId);
+      if(event.target === modal){
+        closeModal(modalId);
+        if(modalId === 'loginModal'){
+          resetLoginForm();
+          loginStep = 1;
+        }
+      }
+    });
+  };
+</script>
+</body>
+</html>
