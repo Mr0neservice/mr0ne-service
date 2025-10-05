@@ -358,6 +358,7 @@
     box-shadow: 0 8px 30px rgba(0, 255, 136, 0.3);
     background: rgba(0, 255, 136, 0.1);
     color: #000;
+    cursor: default;
   }
   a.contact-method div {
     font-size: 3em;
@@ -398,53 +399,6 @@
     font-size: 0.95em;
     font-weight: normal;
     margin-top: 0;
-  }
-
-  /* Contact Method Modal */
-  #contactMethodModal .modal-content {
-    max-width: 500px;
-    text-align: center;
-  }
-  #contactMethodModal h2 {
-    margin-bottom: 25px;
-  }
-  #contactMethodModal p#orderIdDisplay {
-    color: #00ff88;
-    font-weight: bold;
-    margin-bottom: 20px;
-    font-size: 1.2em;
-  }
-  .contact-method-btns {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  a.contact-method-btn {
-    background: linear-gradient(135deg, #00ff88, #00cc6f);
-    color: #000;
-    font-weight: bold;
-    padding: 25px 35px;
-    border-radius: 20px;
-    cursor: pointer;
-    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.5);
-    transition: all 0.3s ease;
-    min-width: 140px;
-    user-select: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1.25em;
-    text-decoration: none;
-    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.5);
-  }
-  a.contact-method-btn:hover {
-    box-shadow: 0 15px 60px rgba(0, 255, 136, 0.8);
-    transform: translateY(-6px) scale(1.1);
-  }
-  a.contact-method-btn div {
-    font-size: 3em;
-    margin-bottom: 12px;
   }
 
   /* Payment Methods Section */
@@ -494,7 +448,7 @@
 <section id="services">
   <h2>🔥 Choose Your Boosting Service</h2>
   <p style="text-align: center; color: #bbb; font-size: 1.1em; margin: 10px 0 20px;">
-    Select the service you want and contact us to get started!
+    Select the service you want and pay securely via PayPal, Visa, or MasterCard!
   </p>
   <div class="service-card">
     <div class="grid">
@@ -603,26 +557,14 @@
     <div class="pulse-orb" style="bottom: -40px; left: -40px; width: 180px; height: 180px; animation-delay: 1s;"></div>
     <div style="text-align: center; margin-bottom: 40px; position: relative; z-index: 1;">
       <h3 style="color: #00ff88; font-size: 1.8em; margin-bottom: 15px;">Ready to Start Your Boost?</h3>
-      <p style="color: #bbb; font-size: 1.1em;">Choose your preferred platform to reach us. We respond within minutes!</p>
+      <p style="color: #bbb; font-size: 1.1em;">Join our official Discord server to chat live with our team and get instant support!</p>
     </div>
     <div class="contact-grid">
-      <a href="#" class="contact-method" onclick="alert('Discord is currently blocked in your region. Please contact us via Email or WhatsApp.')">
+      <a href="https://discord.gg/9SYWCZr8" target="_blank" rel="noopener noreferrer" class="contact-method">
         <div>💬</div>
-        <h4>Discord</h4>
-        <p>NowOne_</p>
+        <h4>Mr0neService Discord Server</h4>
+        <p>Join our official server for instant support & updates</p>
         <small>Instant messaging</small>
-      </a>
-      <a href="mailto:contact.mr0neservice@gmail.com" class="contact-method">
-        <div>📧</div>
-        <h4>Email</h4>
-        <p>contact.mr0neservice@gmail.com</p>
-        <small>Response within 1 hour</small>
-      </a>
-      <a href="#" class="contact-method" onclick="alert('WhatsApp contact is currently unavailable.')">
-        <div>📱</div>
-        <h4>WhatsApp</h4>
-        <p>@Mr0neService</p>
-        <small>24/7 available</small>
       </a>
     </div>
     <div class="contact-info-box">
@@ -694,7 +636,7 @@
       <h3>Total Price:</h3>
       <div class="price" id="divisionPrice">$0</div>
     </div>
-    <button class="confirm-btn" onclick="confirmOrder('division')">Confirm & Contact Us</button>
+    <button class="confirm-btn" onclick="confirmOrder('division')">Confirm & Pay Now</button>
   </div>
 </div>
 
@@ -715,7 +657,7 @@
       <h3>Total Price:</h3>
       <div class="price" id="futPrice">$0</div>
     </div>
-    <button class="confirm-btn" onclick="confirmOrder('fut')">Confirm & Contact Us</button>
+    <button class="confirm-btn" onclick="confirmOrder('fut')">Confirm & Pay Now</button>
   </div>
 </div>
 
@@ -735,21 +677,31 @@
       <h3>Total Price:</h3>
       <div class="price" id="squadPrice">$0</div>
     </div>
-    <button class="confirm-btn" onclick="confirmOrder('squad')">Confirm & Contact Us</button>
+    <button class="confirm-btn" onclick="confirmOrder('squad')">Confirm & Pay Now</button>
   </div>
 </div>
 
-<!-- Contact Method Modal -->
-<div id="contactMethodModal" class="modal">
+<!-- Payment Modal -->
+<div id="paymentModal" class="modal">
   <div class="modal-content">
-    <span class="close" onclick="closeModal('contactMethodModal')">&times;</span>
-    <h2>📞 Order Confirmed! Contact via Discord</h2>
-    <p id="orderIdDisplay" style="color: #00ff88; font-weight: bold; margin-bottom: 20px; font-size: 1.2em;"></p>
-    <div class="contact-method-btns" style="justify-content:center;">
-      <a href="#" class="contact-method-btn" onclick="alert('Discord is currently blocked in your region. Please contact us via Email or WhatsApp.')">
-        <div>💬</div>
-        Discord Server
-      </a>
+    <span class="close" onclick="closeModal('paymentModal')">&times;</span>
+    <h2>💳 Complete Your Payment</h2>
+    <p id="paymentOrderInfo" style="color: #00ff88; font-weight: bold; margin-bottom: 20px;"></p>
+    <div style="text-align:center;">
+      <!-- PayPal Button -->
+      <div id="paypal-button-container" style="margin-bottom: 25px;"></div>
+      <p style="margin-bottom: 20px;">Or pay with your credit/debit card:</p>
+      <!-- Stripe-like card form placeholder (for demonstration only) -->
+      <form id="cardPaymentForm" onsubmit="handleCardPayment(event)" style="max-width: 400px; margin: 0 auto; text-align:left; color:#eee;">
+        <label for="cardNumber">Card Number</label><br/>
+        <input type="text" id="cardNumber" name="cardNumber" required placeholder="1234 5678 9012 3456" style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:none;"/><br/>
+        <label for="expiry">Expiry Date</label><br/>
+        <input type="text" id="expiry" name="expiry" required placeholder="MM/YY" style="width:100px; padding:10px; margin-bottom:15px; border-radius:8px; border:none;"/><br/>
+        <label for="cvc">CVC</label><br/>
+        <input type="text" id="cvc" name="cvc" required placeholder="123" style="width:80px; padding:10px; margin-bottom:20px; border-radius:8px; border:none;"/><br/>
+        <button type="submit" class="confirm-btn" style="width:100%;">Pay Now</button>
+      </form>
+      <p style="margin-top: 20px; font-size: 0.9em; color: #bbb;">* This is a demo payment form. Integration with payment gateway required for live payments.</p>
     </div>
   </div>
 </div>
@@ -851,15 +803,27 @@
     }
     lastOrderMessage = msg;
     lastOrderId = generateOrderId();
+
     closeModal(service + 'Modal');
 
-    const orderIdDisplay = document.getElementById('orderIdDisplay');
-    orderIdDisplay.textContent = `Your Order ID: ${lastOrderId} (Give this to the Discord mod)`;
-    document.getElementById('contactMethodModal').style.display = 'block';
+    // Show payment modal with order info
+    const paymentInfo = document.getElementById('paymentOrderInfo');
+    paymentInfo.textContent = `${msg} | Order ID: ${lastOrderId}`;
+    document.getElementById('paymentModal').style.display = 'block';
+
+    // Reset payment form
+    document.getElementById('cardPaymentForm').reset();
+  }
+
+  // Dummy card payment handler (replace with real payment gateway integration)
+  function handleCardPayment(event){
+    event.preventDefault();
+    alert('Thank you for your payment!\n' + lastOrderMessage + '\nOrder ID: ' + lastOrderId + '\n\nPlease join our Discord server for support.');
+    closeModal('paymentModal');
   }
 
   window.onclick = function(event){
-    const modals = ['divisionModal', 'futModal', 'squadModal', 'contactMethodModal'];
+    const modals = ['divisionModal', 'futModal', 'squadModal', 'paymentModal'];
     modals.forEach(modalId => {
       const modal = document.getElementById(modalId);
       if(event.target === modal){
@@ -867,6 +831,48 @@
       }
     });
   };
+
+  // Load PayPal SDK and render button
+  (function loadPayPal(){
+    const script = document.createElement('script');
+    script.src = "https://www.paypal.com/sdk/js?client-id=sb&currency=USD"; // Replace 'sb' with your live client-id
+    script.onload = () => {
+      if (window.paypal) {
+        paypal.Buttons({
+          style: {
+            shape: 'rect',
+            color: 'green',
+            layout: 'vertical',
+            label: 'paypal',
+          },
+          createOrder: function(data, actions) {
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: currentPrice.toString(),
+                  currency_code: "USD"
+                },
+                description: lastOrderMessage
+              }]
+            });
+          },
+          onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+              alert('Payment completed by ' + details.payer.name.given_name + '!\n' + lastOrderMessage + '\nOrder ID: ' + lastOrderId + '\n\nPlease join our Discord server for support.');
+              closeModal('paymentModal');
+            });
+          },
+          onCancel: function(data) {
+            alert('Payment cancelled.');
+          },
+          onError: function(err) {
+            alert('Payment error: ' + err);
+          }
+        }).render('#paypal-button-container');
+      }
+    };
+    document.head.appendChild(script);
+  })();
 </script>
 </body>
 </html>
