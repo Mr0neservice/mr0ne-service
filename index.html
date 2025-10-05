@@ -447,6 +447,41 @@
     margin-bottom: 12px;
   }
 
+  /* Payment Methods Section */
+  #payment-methods {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 40px;
+    background: linear-gradient(135deg, #1a1a1a, #252525);
+    border-radius: 20px;
+    border: 2px solid #00ff88;
+    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
+    text-align: center;
+  }
+  #payment-methods h2 {
+    color: #00ff88;
+    margin-bottom: 30px;
+  }
+  #payment-methods .payment-logos {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  #payment-methods .payment-logos div {
+    flex: 0 0 120px;
+  }
+  #payment-methods .payment-logos img {
+    width: 100%;
+    max-width: 120px;
+    filter: brightness(0) invert(1);
+  }
+  #payment-methods p {
+    color: #bbb;
+    margin-top: 20px;
+    font-size: 1.1em;
+  }
 </style>
 </head>
 <body>
@@ -503,14 +538,18 @@
 <section id="pricing">
   <h2>💰 Pricing</h2>
   <table class="pricing-table">
-    <tr><th>Service</th><th>Price</th></tr>
-    <tr><td class="service-name">📈 Division 10 → 7</td><td>$15</td></tr>
-    <tr><td class="service-name">📈 Division 10 → 5</td><td>$25</td></tr>
-    <tr><td class="service-name">🏆 FUT Champions – 7 Wins</td><td>$15</td></tr>
-    <tr><td class="service-name">🏆 FUT Champions – 11 Wins</td><td>$25</td></tr>
-    <tr><td class="service-name">🏆 FUT Champions – 15 Wins</td><td>$40</td></tr>
-    <tr><td class="service-name">⚔️ Squad Battles - Gold</td><td>$35</td></tr>
-    <tr><td class="service-name">⚔️ Squad Battles - Elite</td><td>$50</td></tr>
+    <thead>
+      <tr><th>Service</th><th>Price</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="service-name">📈 Division 10 → 7</td><td>$15</td></tr>
+      <tr><td class="service-name">📈 Division 10 → 5</td><td>$25</td></tr>
+      <tr><td class="service-name">🏆 FUT Champions – 7 Wins</td><td>$15</td></tr>
+      <tr><td class="service-name">🏆 FUT Champions – 11 Wins</td><td>$25</td></tr>
+      <tr><td class="service-name">🏆 FUT Champions – 15 Wins</td><td>$40</td></tr>
+      <tr><td class="service-name">⚔️ Squad Battles - Gold</td><td>$35</td></tr>
+      <tr><td class="service-name">⚔️ Squad Battles - Elite</td><td>$50</td></tr>
+    </tbody>
   </table>
   <p style="margin-top:10px;">👉 Custom orders available on request!</p>
 </section>
@@ -567,11 +606,23 @@
       <p style="color: #bbb; font-size: 1.1em;">Choose your preferred platform to reach us. We respond within minutes!</p>
     </div>
     <div class="contact-grid">
-      <a href="https://discord.gg/9SYWCZr8" target="_blank" rel="noopener noreferrer" class="contact-method">
+      <a href="#" class="contact-method" onclick="alert('Discord is currently blocked in your region. Please contact us via Email or WhatsApp.')">
         <div>💬</div>
-        <h4>Mr0neService Discord Server</h4>
-        <p>Join our official server for instant support & updates</p>
+        <h4>Discord</h4>
+        <p>NowOne_</p>
         <small>Instant messaging</small>
+      </a>
+      <a href="mailto:contact.mr0neservice@gmail.com" class="contact-method">
+        <div>📧</div>
+        <h4>Email</h4>
+        <p>contact.mr0neservice@gmail.com</p>
+        <small>Response within 1 hour</small>
+      </a>
+      <a href="#" class="contact-method" onclick="alert('WhatsApp contact is currently unavailable.')">
+        <div>📱</div>
+        <h4>WhatsApp</h4>
+        <p>@Mr0neService</p>
+        <small>24/7 available</small>
       </a>
     </div>
     <div class="contact-info-box">
@@ -579,6 +630,22 @@
       <p>We are here to answer all your questions and get your boost started immediately!</p>
     </div>
   </div>
+</section>
+
+<section id="payment-methods">
+  <h2>💳 Payment Methods We Accept</h2>
+  <div class="payment-logos">
+    <div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" />
+    </div>
+    <div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" />
+    </div>
+    <div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="MasterCard" />
+    </div>
+  </div>
+  <p>We accept PayPal, Visa, and MasterCard for your convenience and security.</p>
 </section>
 
 <footer>
@@ -679,7 +746,7 @@
     <h2>📞 Order Confirmed! Contact via Discord</h2>
     <p id="orderIdDisplay" style="color: #00ff88; font-weight: bold; margin-bottom: 20px; font-size: 1.2em;"></p>
     <div class="contact-method-btns" style="justify-content:center;">
-      <a href="https://discord.gg/9SYWCZr8" target="_blank" rel="noopener noreferrer" class="contact-method-btn" id="discordLink">
+      <a href="#" class="contact-method-btn" onclick="alert('Discord is currently blocked in your region. Please contact us via Email or WhatsApp.')">
         <div>💬</div>
         Discord Server
       </a>
