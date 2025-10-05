@@ -351,13 +351,6 @@
     color: #00ff88;
     text-align: center;
     user-select: none;
-  }
-  a.contact-method:hover {
-    transform: translateY(-8px) scale(1.05);
-    border-color: #00ff88;
-    box-shadow: 0 8px 30px rgba(0, 255, 136, 0.3);
-    background: rgba(0, 255, 136, 0.1);
-    color: #000;
     cursor: default;
   }
   a.contact-method div {
@@ -436,6 +429,25 @@
     margin-top: 20px;
     font-size: 1.1em;
   }
+
+  /* Payment Choice Styles */
+  .payment-choice {
+    margin: 20px 0 30px;
+    font-size: 1.2em;
+  }
+  .payment-choice label {
+    margin-right: 25px;
+    cursor: pointer;
+    color: #00ff88;
+    font-weight: bold;
+  }
+  .payment-section {
+    display: none;
+    margin-top: 20px;
+  }
+  .payment-section.active {
+    display: block;
+  }
 </style>
 </head>
 <body>
@@ -448,7 +460,7 @@
 <section id="services">
   <h2>🔥 Choose Your Boosting Service</h2>
   <p style="text-align: center; color: #bbb; font-size: 1.1em; margin: 10px 0 20px;">
-    Select the service you want and pay securely via PayPal, Visa, or MasterCard!
+    Select the service you want and pay securely via PayPal or Credit/Debit Card!
   </p>
   <div class="service-card">
     <div class="grid">
@@ -560,10 +572,10 @@
       <p style="color: #bbb; font-size: 1.1em;">Join our official Discord server to chat live with our team and get instant support!</p>
     </div>
     <div class="contact-grid">
-      <a href="https://discord.gg/9SYWCZr8" target="_blank" rel="noopener noreferrer" class="contact-method">
+      <a href="#" class="contact-method" onclick="alert('Discord is blocked in your region. Please use a VPN or contact us when possible.')">
         <div>💬</div>
-        <h4>Mr0neService Discord Server</h4>
-        <p>Join our official server for instant support & updates</p>
+        <h4>Discord Server</h4>
+        <p>Unavailable due to regional restrictions</p>
         <small>Instant messaging</small>
       </a>
     </div>
@@ -636,7 +648,31 @@
       <h3>Total Price:</h3>
       <div class="price" id="divisionPrice">$0</div>
     </div>
-    <button class="confirm-btn" onclick="confirmOrder('division')">Confirm & Pay Now</button>
+
+    <!-- Payment choice -->
+    <div class="payment-choice">
+      <label><input type="radio" name="paymentMethodDivision" value="paypal" checked onchange="selectPaymentMethod('division', this.value)"> PayPal</label>
+      <label><input type="radio" name="paymentMethodDivision" value="card" onchange="selectPaymentMethod('division', this.value)"> Credit/Debit Card</label>
+    </div>
+
+    <!-- PayPal payment container -->
+    <div id="paypalPaymentDivision" class="payment-section active">
+      <div id="paypal-button-container-division"></div>
+    </div>
+
+    <!-- Card payment form -->
+    <div id="cardPaymentDivision" class="payment-section">
+      <form id="cardPaymentFormDivision" onsubmit="handleCardPayment(event, 'division')">
+        <label for="cardNumberDivision">Card Number</label><br/>
+        <input type="text" id="cardNumberDivision" name="cardNumberDivision" required placeholder="1234 5678 9012 3456" style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:none;"/><br/>
+        <label for="expiryDivision">Expiry Date</label><br/>
+        <input type="text" id="expiryDivision" name="expiryDivision" required placeholder="MM/YY" style="width:100px; padding:10px; margin-bottom:15px; border-radius:8px; border:none;"/><br/>
+        <label for="cvcDivision">CVC</label><br/>
+        <input type="text" id="cvcDivision" name="cvcDivision" required placeholder="123" style="width:80px; padding:10px; margin-bottom:20px; border-radius:8px; border:none;"/><br/>
+        <button type="submit" class="confirm-btn" style="width:100%;">Pay Now</button>
+      </form>
+      <p style="margin-top: 20px; font-size: 0.9em; color: #bbb;">* This is a demo payment form. Integration with payment gateway required for live payments.</p>
+    </div>
   </div>
 </div>
 
@@ -657,7 +693,31 @@
       <h3>Total Price:</h3>
       <div class="price" id="futPrice">$0</div>
     </div>
-    <button class="confirm-btn" onclick="confirmOrder('fut')">Confirm & Pay Now</button>
+
+    <!-- Payment choice -->
+    <div class="payment-choice">
+      <label><input type="radio" name="paymentMethodFut" value="paypal" checked onchange="selectPaymentMethod('fut', this.value)"> PayPal</label>
+      <label><input type="radio" name="paymentMethodFut" value="card" onchange="selectPaymentMethod('fut', this.value)"> Credit/Debit Card</label>
+    </div>
+
+    <!-- PayPal payment container -->
+    <div id="paypalPaymentFut" class="payment-section active">
+      <div id="paypal-button-container-fut"></div>
+    </div>
+
+    <!-- Card payment form -->
+    <div id="cardPaymentFut" class="payment-section">
+      <form id="cardPaymentFormFut" onsubmit="handleCardPayment(event, 'fut')">
+        <label for="cardNumberFut">Card Number</label><br/>
+        <input type="text" id="cardNumberFut" name="cardNumberFut" required placeholder="1234 5678 9012 3456" style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:none;"/><br/>
+        <label for="expiryFut">Expiry Date</label><br/>
+        <input type="text" id="expiryFut" name="expiryFut" required placeholder="MM/YY" style="width:100px; padding:10px; margin-bottom:15px; border-radius:8px; border:none;"/><br/>
+        <label for="cvcFut">CVC</label><br/>
+        <input type="text" id="cvcFut" name="cvcFut" required placeholder="123" style="width:80px; padding:10px; margin-bottom:20px; border-radius:8px; border:none;"/><br/>
+        <button type="submit" class="confirm-btn" style="width:100%;">Pay Now</button>
+      </form>
+      <p style="margin-top: 20px; font-size: 0.9em; color: #bbb;">* This is a demo payment form. Integration with payment gateway required for live payments.</p>
+    </div>
   </div>
 </div>
 
@@ -677,28 +737,27 @@
       <h3>Total Price:</h3>
       <div class="price" id="squadPrice">$0</div>
     </div>
-    <button class="confirm-btn" onclick="confirmOrder('squad')">Confirm & Pay Now</button>
-  </div>
-</div>
 
-<!-- Payment Modal -->
-<div id="paymentModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('paymentModal')">&times;</span>
-    <h2>💳 Complete Your Payment</h2>
-    <p id="paymentOrderInfo" style="color: #00ff88; font-weight: bold; margin-bottom: 20px;"></p>
-    <div style="text-align:center;">
-      <!-- PayPal Button -->
-      <div id="paypal-button-container" style="margin-bottom: 25px;"></div>
-      <p style="margin-bottom: 20px;">Or pay with your credit/debit card:</p>
-      <!-- Stripe-like card form placeholder (for demonstration only) -->
-      <form id="cardPaymentForm" onsubmit="handleCardPayment(event)" style="max-width: 400px; margin: 0 auto; text-align:left; color:#eee;">
-        <label for="cardNumber">Card Number</label><br/>
-        <input type="text" id="cardNumber" name="cardNumber" required placeholder="1234 5678 9012 3456" style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:none;"/><br/>
-        <label for="expiry">Expiry Date</label><br/>
-        <input type="text" id="expiry" name="expiry" required placeholder="MM/YY" style="width:100px; padding:10px; margin-bottom:15px; border-radius:8px; border:none;"/><br/>
-        <label for="cvc">CVC</label><br/>
-        <input type="text" id="cvc" name="cvc" required placeholder="123" style="width:80px; padding:10px; margin-bottom:20px; border-radius:8px; border:none;"/><br/>
+    <!-- Payment choice -->
+    <div class="payment-choice">
+      <label><input type="radio" name="paymentMethodSquad" value="paypal" checked onchange="selectPaymentMethod('squad', this.value)"> PayPal</label>
+      <label><input type="radio" name="paymentMethodSquad" value="card" onchange="selectPaymentMethod('squad', this.value)"> Credit/Debit Card</label>
+    </div>
+
+    <!-- PayPal payment container -->
+    <div id="paypalPaymentSquad" class="payment-section active">
+      <div id="paypal-button-container-squad"></div>
+    </div>
+
+    <!-- Card payment form -->
+    <div id="cardPaymentSquad" class="payment-section">
+      <form id="cardPaymentFormSquad" onsubmit="handleCardPayment(event, 'squad')">
+        <label for="cardNumberSquad">Card Number</label><br/>
+        <input type="text" id="cardNumberSquad" name="cardNumberSquad" required placeholder="1234 5678 9012 3456" style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:none;"/><br/>
+        <label for="expirySquad">Expiry Date</label><br/>
+        <input type="text" id="expirySquad" name="expirySquad" required placeholder="MM/YY" style="width:100px; padding:10px; margin-bottom:15px; border-radius:8px; border:none;"/><br/>
+        <label for="cvcSquad">CVC</label><br/>
+        <input type="text" id="cvcSquad" name="cvcSquad" required placeholder="123" style="width:80px; padding:10px; margin-bottom:20px; border-radius:8px; border:none;"/><br/>
         <button type="submit" class="confirm-btn" style="width:100%;">Pay Now</button>
       </form>
       <p style="margin-top: 20px; font-size: 0.9em; color: #bbb;">* This is a demo payment form. Integration with payment gateway required for live payments.</p>
@@ -716,6 +775,7 @@
     else if(service === 'fut') document.getElementById('futModal').style.display = 'block';
     else if(service === 'squad') document.getElementById('squadModal').style.display = 'block';
     updatePriceDisplay(service, false);
+    resetPaymentChoice(service);
   }
 
   function closeModal(id){
@@ -734,6 +794,7 @@
       currentPrice = (c - d) * 5;
       document.getElementById('divisionPrice').textContent = '$' + currentPrice;
       updatePriceDisplay('division', false);
+      resetPaymentChoice('division');
     } else if(c && !isNaN(d) && c <= d){
       alert('Desired division must be higher than current division!');
       document.getElementById('desiredDivision').value = '';
@@ -751,8 +812,10 @@
     if(currentPrice > 0){
       document.getElementById('futPrice').textContent = '$' + currentPrice;
       updatePriceDisplay('fut', false);
+      resetPaymentChoice('fut');
     } else {
       updatePriceDisplay('fut', true);
+      currentPrice = 0;
     }
   }
   function calculateSquadPrice(){
@@ -763,8 +826,10 @@
     if(currentPrice > 0){
       document.getElementById('squadPrice').textContent = '$' + currentPrice;
       updatePriceDisplay('squad', false);
+      resetPaymentChoice('squad');
     } else {
       updatePriceDisplay('squad', true);
+      currentPrice = 0;
     }
   }
   function updatePriceDisplay(service, hide){
@@ -804,26 +869,46 @@
     lastOrderMessage = msg;
     lastOrderId = generateOrderId();
 
-    closeModal(service + 'Modal');
+    // Show payment modal inside respective service modal by showing payment choice sections
+    // Here, just alert and keep modal open for user to select payment and pay
+    alert('Please choose your payment method below and complete the payment.');
+  }
 
-    // Show payment modal with order info
-    const paymentInfo = document.getElementById('paymentOrderInfo');
-    paymentInfo.textContent = `${msg} | Order ID: ${lastOrderId}`;
-    document.getElementById('paymentModal').style.display = 'block';
+  // Payment choice toggle per service modal
+  function selectPaymentMethod(service, method){
+    const paypalSection = document.getElementById('paypalPayment' + capitalize(service));
+    const cardSection = document.getElementById('cardPayment' + capitalize(service));
+    if(!paypalSection || !cardSection) return;
+    if(method === 'paypal'){
+      paypalSection.classList.add('active');
+      cardSection.classList.remove('active');
+    } else {
+      paypalSection.classList.remove('active');
+      cardSection.classList.add('active');
+    }
+  }
 
-    // Reset payment form
-    document.getElementById('cardPaymentForm').reset();
+  function resetPaymentChoice(service){
+    const radios = document.querySelectorAll(`#${service}Modal input[name="paymentMethod${capitalize(service)}"]`);
+    radios.forEach(radio => {
+      if(radio.value === 'paypal') radio.checked = true;
+    });
+    selectPaymentMethod(service, 'paypal');
+  }
+
+  function capitalize(str){
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
   // Dummy card payment handler (replace with real payment gateway integration)
-  function handleCardPayment(event){
+  function handleCardPayment(event, service){
     event.preventDefault();
     alert('Thank you for your payment!\n' + lastOrderMessage + '\nOrder ID: ' + lastOrderId + '\n\nPlease join our Discord server for support.');
-    closeModal('paymentModal');
+    closeModal(service + 'Modal');
   }
 
   window.onclick = function(event){
-    const modals = ['divisionModal', 'futModal', 'squadModal', 'paymentModal'];
+    const modals = ['divisionModal', 'futModal', 'squadModal'];
     modals.forEach(modalId => {
       const modal = document.getElementById(modalId);
       if(event.target === modal){
@@ -832,13 +917,13 @@
     });
   };
 
-  // Load PayPal SDK and render button
+  // Load PayPal SDK and render buttons for each modal container
   (function loadPayPal(){
     const script = document.createElement('script');
     script.src = "https://www.paypal.com/sdk/js?client-id=sb&currency=USD"; // Replace 'sb' with your live client-id
     script.onload = () => {
       if (window.paypal) {
-        paypal.Buttons({
+        const buttonsConfig = {
           style: {
             shape: 'rect',
             color: 'green',
@@ -859,7 +944,9 @@
           onApprove: function(data, actions) {
             return actions.order.capture().then(function(details) {
               alert('Payment completed by ' + details.payer.name.given_name + '!\n' + lastOrderMessage + '\nOrder ID: ' + lastOrderId + '\n\nPlease join our Discord server for support.');
-              closeModal('paymentModal');
+              closeModal('divisionModal');
+              closeModal('futModal');
+              closeModal('squadModal');
             });
           },
           onCancel: function(data) {
@@ -868,7 +955,11 @@
           onError: function(err) {
             alert('Payment error: ' + err);
           }
-        }).render('#paypal-button-container');
+        };
+
+        paypal.Buttons(buttonsConfig).render('#paypal-button-container-division');
+        paypal.Buttons(buttonsConfig).render('#paypal-button-container-fut');
+        paypal.Buttons(buttonsConfig).render('#paypal-button-container-squad');
       }
     };
     document.head.appendChild(script);
